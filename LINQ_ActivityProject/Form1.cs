@@ -148,23 +148,11 @@ namespace LINQ_ActivityProject
         private void ProductQtyTB_KeyDown(object sender, KeyEventArgs e)
         {
 
-            if (e.KeyCode == Keys.Enter)
-            {
-                double tempPrice = double.Parse(PriceTB.Text);
-                double tempQty = double.Parse(ProductQtyTB.Text);
-                double total = tempPrice * tempQty;
-                TotalAmountlbl.Text = total.ToString();
-            }
 
         }
 
         private void button7_Click(object sender, System.EventArgs e)
         {
-            SalesID += 1;
-            salesTransaction.Rows.Add(SalesID, int.Parse(CustomerIDTB.Text), CustomerComBo.Text, CustomerNumTB.Text, int.Parse(ProductIDTB.Text),
-                ProductCombo.Text, ProdCatTB.Text, double.Parse(PriceTB.Text), int.Parse(ProductQtyTB.Text), double.Parse(TotalAmountlbl.Text), DateTime.Parse(dateTimePicker1.Text));
-
-
 
         }
 
@@ -192,17 +180,6 @@ namespace LINQ_ActivityProject
                                           TotalQuantitySold = group.Sum(row => row.Field<int>("QtySold"))
                                       });
 
-
-
-            foreach (var sales in SalesByProductCategory)
-            {
-
-                message += $"ProductName : {sales.ProductName}" +
-                    $" \n ProductCat: {sales.ProductCategory} " +
-                    $"\n Qty: {sales.TotalQuantitySold} \n \n";
-
-            }
-            MessageBox.Show(message);
 
         }
 
