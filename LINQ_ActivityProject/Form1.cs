@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace LINQ_ActivityProject
@@ -101,43 +100,14 @@ namespace LINQ_ActivityProject
 
         private void CustomerComBo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            var selectedCustomer = from customer in customerList.AsEnumerable()
-                                   where customer.Field<string>("CustomerName") == CustomerComBo.Text
-                                   select new
-                                   {
-                                       Custid = customer.Field<int>("CustomerID"),
-                                       Custcontact = customer.Field<string>("ContactNo")
-                                   };
 
-            foreach (var id in selectedCustomer)
-            {
-                CustomerNumTB.Text = id.Custcontact;
-                CustomerIDTB.Text = id.Custid.ToString();
-
-            }
 
 
         }
 
         private void ProductCombo_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            var selectedProduct = from product in productList.AsEnumerable()
-                                  where product.Field<string>("ProductName") == ProductCombo.Text
-                                  select new
-                                  {
-                                      Proid = product.Field<int>("ProductID"),
-                                      ProCat = product.Field<string>("ProductCategory"),
-                                      ProPrice = product.Field<double>("Price")
-                                  };
 
-            foreach (var id in selectedProduct)
-            {
-
-                ProductIDTB.Text = id.Proid.ToString();
-                ProdCatTB.Text = id.ProCat;
-                PriceTB.Text = id.ProPrice.ToString();
-
-            }
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -163,22 +133,12 @@ namespace LINQ_ActivityProject
 
         private void DailySalesRep_Click(object sender, System.EventArgs e)
         {
-            DailySalesForm dailysales = new DailySalesForm(salesTransaction);
-            dailysales.ShowDialog();
+
         }
 
         private void SalesByProCat_Click(object sender, System.EventArgs e)
         {
-            message = null;
 
-            var SalesByProductCategory = salesTransaction.AsEnumerable()
-                                     .GroupBy(sales => sales.Field<string>("ProductCategory"))
-                                      .Select(group => new
-                                      {
-                                          ProductCategory = group.Key,
-                                          ProductName = string.Join(", ", group.Select(x => x.Field<string>("ProductName")).Distinct()),
-                                          TotalQuantitySold = group.Sum(row => row.Field<int>("QtySold"))
-                                      });
 
 
         }
