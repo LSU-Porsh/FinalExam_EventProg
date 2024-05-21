@@ -147,8 +147,13 @@ namespace LINQ_ActivityProject
         {
 
         }
+
+        private void ProductBtn_Click(object sender, EventArgs e)
+        {
+            ViewForm productView = new ViewForm();
+            productView.ShowDialog();
+        }
     }
 }
-
 
 
